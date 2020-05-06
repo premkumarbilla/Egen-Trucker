@@ -4,21 +4,22 @@ import IO.Egen.entity.*;
 import IO.Egen.exception.ResourceNotFoundException;
 import IO.Egen.respository.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class VehicleServiceImplementation implements VehicleService {
+@Qualifier("service")
+public class VehicleServiceImplementation implements vehicleService {
 
     @Autowired
-    VehicleRepository vehicles;
+    vehicleRepository vehicles;
 
     @Autowired
-    updateRepository readings;
+    updateRepository updates;
 
     @Autowired
     tireRepository tires;
@@ -42,7 +43,7 @@ public class VehicleServiceImplementation implements VehicleService {
 
     @Transactional
     public List<vehicleUpdate> findGeoLocation(String vin) {
-        Optional<List<vehicleUpdate>> existing = readings.findGeoLocation(vin);
+        Optional<List<vehicleUpdate>> existing = updates.findGeoLocation(vin);
         if (!existing.isPresent()){
             throw new ResourceNotFoundException("Vehicle with vin " + vin + " doesn't exist.");
         }
@@ -66,6 +67,7 @@ public class VehicleServiceImplementation implements VehicleService {
             return null;
         }
         return vehicles.save(vehicleInfo);
+
     }
 
 
@@ -75,7 +77,7 @@ public class VehicleServiceImplementation implements VehicleService {
         if(!existing.isPresent()){
             throw new ResourceNotFoundException(" Vehicle with vin "+ vehicleUpdate.getVin() + " is not in our records");
         }
-        return readings.save(vehicleUpdate);
+        return updates.save(vehicleUpdate);
     }
 
     @Transactional

@@ -1,27 +1,28 @@
 package IO.Egen.controller;
 
 import IO.Egen.entity.*;
-import IO.Egen.service.VehicleService;
+import IO.Egen.service.vehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.sql.SQLOutput;
 import java.util.List;
-import java.util.Optional;
+
 @CrossOrigin
 @RestController
 public class vehicleController {
 
     @Autowired
-    VehicleService service;
+    @Qualifier("service")
+    vehicleService service;
 
     @GetMapping("/vehicles")
     //@RequestMapping(method = RequestMethod.GET, value = )
     public List<vehicleInfo> findAll(){
         return service.findAll();
     }
+
     @GetMapping("/vehicles/{id}")
     //@RequestMapping(method = RequestMethod.GET, value = )
     public vehicleInfo findByID(@PathVariable("id") String vin ){

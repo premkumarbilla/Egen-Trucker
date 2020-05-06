@@ -5,7 +5,7 @@ import IO.Egen.entity.*;
 import java.util.List;
 import java.util.Optional;
 
-public interface VehicleService {
+public interface vehicleService {
     vehicleInfo update(vehicleInfo vehicle);
     List<vehicleInfo> findAll();
     vehicleInfo findById(String ID);
