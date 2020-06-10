@@ -1,4 +1,4 @@
-# trucker-seed
+# Fleet Management API
 seed for the Webservices & Cloud project
 
 ### For the final module submission, update following urls for your app:
